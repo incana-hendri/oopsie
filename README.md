@@ -1,36 +1,184 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Oopsie - Squad Infraction Management System
+
+A modern, type-safe infraction management system built with Next.js, TypeScript, and PostgreSQL.
+
+## Technology Stack
+
+- **Frontend:**
+
+  - Next.js 15 with App Router
+  - React 19
+  - TypeScript
+  - Tailwind CSS
+  - Storybook for component documentation
+
+- **Backend:**
+
+  - PostgreSQL 15
+  - Drizzle ORM
+  - NextAuth.js for authentication
+  - Zod for validation
+
+- **Development Tools:**
+  - ESLint with TypeScript and Prettier integration
+  - Husky for Git hooks
+  - Commitlint for conventional commits
+  - Docker for local development
+
+## Prerequisites
+
+- Node.js v20.11.1 (specified in .nvmrc)
+- Docker and Docker Compose
+- pnpm (recommended package manager)
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone <repository-url>
+   cd oopsie
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   pnpm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Set up environment variables:**
 
-## Learn More
+   ```bash
+   cp .env.example .env
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   Update the values in `.env` with your configuration.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Start the development environment:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   # Start Docker services
+   docker-compose up -d
 
-## Deploy on Vercel
+   # Start the development server
+   pnpm dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Access the application:**
+   - Frontend: http://localhost:3000
+   - MailHog (email testing): http://localhost:8025
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development Guidelines
+
+### Code Style
+
+We use ESLint and Prettier to maintain code quality and consistency. The configuration enforces:
+
+- TypeScript strict mode
+- React hooks best practices
+- Accessibility standards
+- Import sorting
+- Consistent formatting
+
+Pre-commit hooks will automatically format and lint your code.
+
+### Git Workflow
+
+1. **Branch Naming:**
+
+   - Feature: `feature/description`
+   - Bug fix: `fix/description`
+   - Refactor: `refactor/description`
+
+2. **Commit Messages:**
+   We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+   ```
+   type(scope): description
+
+   [optional body]
+   [optional footer]
+   ```
+
+   Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+### Testing Strategy
+
+1. **Unit Tests:**
+
+   - Components: Test rendering and interactions
+   - Hooks: Test state management and side effects
+   - Utils: Test pure functions and business logic
+
+2. **Integration Tests:**
+
+   - API endpoints
+   - Authentication flows
+   - Database operations
+
+3. **E2E Tests:**
+   - Critical user journeys
+   - Multi-step workflows
+
+### Component Development
+
+1. **Create new components in `src/components`**
+2. **Add Storybook stories for all components**
+3. **Ensure accessibility compliance**
+4. **Document props and usage**
+
+## Environment Variables
+
+| Variable            | Description                  | Required | Default               |
+| ------------------- | ---------------------------- | -------- | --------------------- |
+| `POSTGRES_USER`     | Database username            | Yes      | -                     |
+| `POSTGRES_PASSWORD` | Database password            | Yes      | -                     |
+| `POSTGRES_DB`       | Database name                | Yes      | -                     |
+| `DATABASE_URL`      | Full database connection URL | Yes      | -                     |
+| `NEXTAUTH_SECRET`   | NextAuth.js secret key       | Yes      | -                     |
+| `NEXTAUTH_URL`      | NextAuth.js URL              | No       | http://localhost:3000 |
+| `SMTP_HOST`         | SMTP server host             | Yes      | localhost             |
+| `SMTP_PORT`         | SMTP server port             | Yes      | 1025                  |
+| `SMTP_FROM`         | Default sender email         | Yes      | -                     |
+
+## Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm storybook` - Start Storybook
+- `pnpm build-storybook` - Build Storybook for deployment
+
+## Deployment
+
+1. **Build the application:**
+
+   ```bash
+   pnpm build
+   ```
+
+2. **Environment setup:**
+
+   - Set up production database
+   - Configure environment variables
+   - Set up email service
+
+3. **Start the application:**
+   ```bash
+   pnpm start
+   ```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
